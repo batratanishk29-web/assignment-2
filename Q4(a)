@@ -1,0 +1,17 @@
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main() {
+    char a[10]="tanishk";
+    char b[10]=" batra";
+    string c="HELLO ";
+    string d="WORLD";
+    strcat(a,b);
+    cout<<a<<endl;
+    cout<<c+d<<endl;
+  
+
+    return 0;
+}
