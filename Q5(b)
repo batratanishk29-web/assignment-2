@@ -1,0 +1,39 @@
+
+#include <iostream>
+using namespace std;
+int main() {
+    cout<<"enter size of diagonal marix : ";
+    int n;
+    cin>>n;
+    int arr[n];
+    int brr[n-1];
+    int crr[n-1];
+    for(int i=0;i<n;i++){
+        cout<<"enter diagonal element "<<i+1<<" : ";
+        cin>>arr[i];
+    }
+    for(int i=0;i<n-1;i++){
+        cout<<"enter upper diagonal element "<<i+1<<" : ";
+        cin>>brr[i];
+    }
+    for(int i=0;i<n-1;i++){
+        cout<<"enter lower diagonal element "<<i+1<<" : ";
+        cin>>crr[i];
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(i == j) 
+                cout << arr[i] << " ";     // main diagonal
+            else if(i == j+1) 
+                cout << crr[j] << " ";     // lower diagonal
+            else if(j == i+1) 
+                cout << brr[i] << " ";     // upper diagonal
+            else 
+                cout << "0 ";              // all others
+        }
+        cout<<endl;
+    }
+
+     return 0;
+    
+        }
