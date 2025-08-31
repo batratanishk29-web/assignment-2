@@ -1,0 +1,18 @@
+#include<iostream>
+using namespace std;
+int main(){
+    char ch;
+    cin>>ch;
+    int x= (int)ch;  
+    if((x < 65) || (x > 122) || (x > 90 && x < 97)) {
+        cout<<"symbol can't be converted";
+    }
+    else if(x>=97 && x<=122) {
+        cout<<"already in lower case";
+    }
+    else {
+        char lower = (char)(x + 32);
+        cout<< lower;
+    }
+    return 0;
+}
