@@ -1,0 +1,17 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[10]={2,5,7,9,4,1,13,7,12,3};
+    int count=0;
+    int k=5;
+    for(int i=0;i<10;i++){
+        for(int j=i+1;j<10;j++){
+            if(abs(arr[i]-arr[j])==k){ count++;
+        cout << "(" << arr[i] << "," << arr[j] << ")\n";}
+        }
+    }
+    cout<<count;
+
+    return 0;
+}
+
