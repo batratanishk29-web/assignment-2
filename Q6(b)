@@ -1,0 +1,119 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+    int arr[3][3];
+    cout<<"Enter elements of 1st 3x3 matrix:\n";
+    for(int i=0;i<3;i++)
+        for(int j=0;j<3;j++)
+            cin>>arr[i][j];
+
+    int nz=0;
+    for(int i=0;i<3;i++)
+        for(int j=0;j<3;j++)
+            if(arr[i][j]!=0) nz++;
+
+    int sp1[nz+1][3], k=1;
+    sp1[0][0]=3; sp1[0][1]=3; sp1[0][2]=nz;
+    for(int i=0;i<3;i++)
+        for(int j=0;j<3;j++)
+            if(arr[i][j]!=0){
+                sp1[k][0]=i;
+                sp1[k][1]=j;
+                sp1[k][2]=arr[i][j];
+                k++;
+            }
+
+    cout<<"\n1st Sparse Matrix (Triplet form):\n";
+    for(int i=0;i<=nz;i++){
+        for(int j=0;j<3;j++)
+            cout<<sp1[i][j]<<" ";
+        cout<<endl;
+    }
+
+  // 2nd matrix
+    int brr[3][3];
+    cout<<"\nEnter elements of 2nd 3x3 matrix:\n";
+    for(int i=0;i<3;i++)
+        for(int j=0;j<3;j++)
+            cin>>brr[i][j];
+
+    int nz2=0;
+    for(int i=0;i<3;i++)
+        for(int j=0;j<3;j++)
+            if(brr[i][j]!=0) nz2++;
+
+    int sp2[nz2+1][3];
+    k=1;
+    sp2[0][0]=3; sp2[0][1]=3; sp2[0][2]=nz2;
+    for(int i=0;i<3;i++)
+        for(int j=0;j<3;j++)
+            if(brr[i][j]!=0){
+                sp2[k][0]=i;
+                sp2[k][1]=j;
+                sp2[k][2]=brr[i][j];
+                k++;
+            }
+
+    cout<<"\n2nd Sparse Matrix (Triplet form):\n";
+    for(int i=0;i<=nz2;i++){
+        for(int j=0;j<3;j++)
+            cout<<sp2[i][j]<<" ";
+        cout<<endl;
+    }
+// add
+    int sp3[nz+nz2+1][3]; 
+    int i=1,j=1,p=1;
+
+    sp3[0][0]=3; sp3[0][1]=3;
+
+    while(i<=nz && j<=nz2){
+        if(sp1[i][0]==sp2[j][0] && sp1[i][1]==sp2[j][1]){
+            // same position 
+            sp3[p][0]=sp1[i][0];
+            sp3[p][1]=sp1[i][1];
+            sp3[p][2]=sp1[i][2]+sp2[j][2];
+            i++; j++; p++;
+        }
+        else if(sp1[i][0]<sp2[j][0] || 
+               (sp1[i][0]==sp2[j][0] && sp1[i][1]<sp2[j][1])){
+            // sp1 element comes first
+            sp3[p][0]=sp1[i][0];
+            sp3[p][1]=sp1[i][1];
+            sp3[p][2]=sp1[i][2];
+            i++; p++;
+        }
+        else{
+            //  sp2 element comes first
+            sp3[p][0]=sp2[j][0];
+            sp3[p][1]=sp2[j][1];
+            sp3[p][2]=sp2[j][2];
+            j++; p++;
+        }
+    }
+
+    // remaining elements-> one matrix finished other elements still there
+    while(i<=nz){
+        sp3[p][0]=sp1[i][0];
+        sp3[p][1]=sp1[i][1];
+        sp3[p][2]=sp1[i][2];
+        i++; p++;
+    }
+    while(j<=nz2){
+        sp3[p][0]=sp2[j][0];
+        sp3[p][1]=sp2[j][1];
+        sp3[p][2]=sp2[j][2];
+        j++; p++;
+    }
+
+    sp3[0][2]=p-1;  // number of nonzeros
+
+    cout<<"\nResultant Sparse Matrix (Triplet form):\n";
+    for(int x=0;x<p;x++){
+        for(int y=0;y<3;y++)
+            cout<<sp3[x][y]<<" ";
+        cout<<endl;
+    }
+
+    return 0;
+}
